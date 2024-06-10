@@ -34,12 +34,8 @@ In the network settins in VBox set port forwarding for SSH (22), HTTPS (443) etc
 apt update && apt install -y sudo ufw curl wget git libnss3-tools make net-tools zsh vim htop mc
 ```
 ## 2. User and domain
-1. Add your user to ```sudo``` and ```docker``` groups
-```bash
-sudo usermod -aG sudo $USER
 
-```
-2. Add your user to sudoers file and change domain name
+1. Add your user to sudoers file and change domain name
 ```bash
 su # switch to root user
 /sbin/visudo  # open an editor and put following line
@@ -47,6 +43,11 @@ username  ALL=(ALL:ALL) ALL
 
 # Set domain name
 echo "127.0.0.1        username.42.fr" >> /etc/hosts
+```
+2. Add your user to ```sudo``` group
+```bash
+sudo usermod -aG sudo $USER
+
 ```
 
 ## 3. SSH
