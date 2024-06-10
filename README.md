@@ -23,9 +23,9 @@ sh ./VBoxLinuxAdditions.run
 In the network settins in VBox set port forwarding for SSH (22), HTTPS (443) etc.
 
 
-## 0d. Set domain name
+## 0d. Set domain name (after you become the sudoers group member)
 ```bash
-echo "127.0.0.1        $USER.42.fr" >> /etc/hosts
+sudo echo "127.0.0.1        $USER.42.fr" >> /etc/hosts
 ```
 
 ## 1. Install tools
@@ -37,11 +37,13 @@ apt update && apt install -y sudo ufw curl wget git libnss3-tools make net-tools
 ## 2. User
 1. Add your user to ```sudo``` and ```docker``` groups
 ```bash
-usermod -aG sudo $USER
-usermod -aG docker $USER
+sudo usermod -aG sudo $USER
+
 ```
 2. Add your user to sudoers file
 ```bash
+su
+sudo su -
 visudo
 username  ALL=(ALL:ALL) ALL
 ```
@@ -62,7 +64,7 @@ sudo $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |   sudo tee /etc/
 2. Installing Docker and Docker Compose
 ```bash
 sudo apt update && sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
-
+sudo usermod -aG docker $USER
 ```
 3. Test
 ```bash
