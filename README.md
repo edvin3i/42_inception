@@ -23,10 +23,7 @@ sh ./VBoxLinuxAdditions.run
 In the network settins in VBox set port forwarding for SSH (22), HTTPS (443) etc.
 
 
-## 0d. Set domain name (after you become the sudoers group member)
-```bash
-sudo echo "127.0.0.1        $USER.42.fr" >> /etc/hosts
-```
+
 
 ## 1. Install tools
 1. Login into your VM and switch to the root.
@@ -42,10 +39,12 @@ sudo usermod -aG sudo $USER
 ```
 2. Add your user to sudoers file
 ```bash
-su
-sudo su -
-visudo
+su # switch to root user
+/sbin/visudo  # open an editor and put following line
 username  ALL=(ALL:ALL) ALL
+
+# Set domain name
+echo "127.0.0.1        username.42.fr" >> /etc/hosts
 ```
 
 ## 3. SSH
