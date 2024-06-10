@@ -16,6 +16,8 @@ Install a guest OS with any windows manager: Xfce for example.
 ## 0b. Install VBoxLinuxAdditions
 Insert VBoxGuestAdditions.iso as a virtual drive 
 ```bash
+su
+cd /media/cdrom0 # maybe cdrom1
 sh ./VBoxLinuxAdditions.run
 ```
 
