@@ -1,6 +1,7 @@
 DOCKER_COMPOSE	=	docker compose
-DCOMPOSE_CONFG	=	docker-compose.yml
-DATA_DIR		=	/home/$(USER)/data
+DCOMPOSE_CONFG	=	srcs/docker-compose.yml
+DATA_DIR		=	$(HOME)/data
+# DATA_DIR		=	/home/$(USER)/data
 RM				=	rm -rf
 
 
