@@ -33,4 +33,4 @@ clean:
 		docker volume prune -f
 		$(RM) $(DATA_DIR)
 
-.PHONY create_dirs build up down start stop list clean
+.PHONY: create_dirs build up down start stop list clean
