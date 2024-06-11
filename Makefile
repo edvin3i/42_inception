@@ -28,10 +28,14 @@ stop:
 list:
 	docker ps
 
-clean:
+clean: down
+		docker system prune -a
+
+fclean:
 		$(DOCKER_COMPOSE) -f $(DCOMPOSE_CONFG) down --rmi all --volumes --remove-orphans
 		docker system prune -f
 		docker volume prune -f
+		docker network prune -f
 		$(RM) $(DATA_DIR)
 
-.PHONY: create_dirs build up down start stop list clean
+.PHONY: create_dirs build up down start stop list clean fclean
