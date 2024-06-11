@@ -24,9 +24,6 @@ sh ./VBoxLinuxAdditions.run
 ## 0c. Set the port forwarding VM <=> Host
 In the network settins in VBox set port forwarding for SSH (22), HTTPS (443) etc.
 
-
-
-
 ## 1. Install tools
 1. Login into your VM and switch to the root.
 2. Run the following commands.
