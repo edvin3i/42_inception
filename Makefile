@@ -1,4 +1,4 @@
-DOCKER_COMPOSE	=	docker-compose
+DOCKER_COMPOSE	=	docker compose
 DCOMPOSE_CONFG	=	docker-compose.yml
 DATA_DIR		=	/home/$(USER)/data
 RM				=	rm -rf
