@@ -5,7 +5,7 @@ volumes:
                 name: wordpress
                 driver: local
                 driver_opts:
-                        device: ${HOME}/data//wordpress
+                        device: ${HOME}/data/wordpress
                         o: bind
                         type: none
         mariadb:
@@ -15,13 +15,13 @@ volumes:
                         device: ${HOME}/data/mariadb
                         o: bind
                         type: none
-        nginx:
-                name: nginx
-                driver: local
-                driver_opts:
-                        device: ${HOME}/data/nginx
-                        o: bind
-                        type: none          
+        # nginx:
+        #         name: nginx
+        #         driver: local
+        #         driver_opts:
+        #                 device: ${HOME}/data/nginx
+        #                 o: bind
+        #                 type: none          
 networks:
   inception:
     name: inception
