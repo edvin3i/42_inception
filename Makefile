@@ -9,6 +9,7 @@ create_dirs:
 	@echo "\e[36mCreating the volumes (dirs) at $(DATA_DIR)\e[0m"
 	@mkdir -p $(DATA_DIR)/mariadb
 	@mkdir -p $(DATA_DIR)/wordpress
+#	@mkdir -p $(DATA_DIR)/nginx
 
 build: create_dirs
 	$(DOCKER_COMPOSE) -f $(DCOMPOSE_CONFG) build
