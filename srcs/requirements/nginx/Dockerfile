@@ -7,7 +7,8 @@ COPY ./tools/gbreana.42.fr.crt /etc/nginx/ssl/
 COPY ./tools/gbreana.42.fr.key /etc/nginx/ssl/
 COPY ./config/default.conf /etc/nginx/sites-available/
 
-RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
+RUN rm -rf /etc/nginx/http.d/default.conf && \
+    ln -s /etc/nginx/sites-available/default.conf /etc/nginx/http.d/
 
 EXPOSE 443
 
