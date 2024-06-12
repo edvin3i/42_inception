@@ -29,7 +29,9 @@ networks:
 services:
   nginx:
     container_name: nginx
-    build: ./requirements/nginx/.
+    build: 
+      context: .
+      dockerfile: nginx/Dockerfile
     ports:
       - "443:443"
     # depends_on:
@@ -53,11 +55,20 @@ services:
   #   restart: always
   # mariadb:
   #   container_name: mariadb
-  #   build: ./requirements/mariadb/.
+  #   build: 
+  #     context: .
+  #     dockerfile: mariadb/Dockerfile
+  #     args:
+  #       - DB_NAME=${DB_NAME}
+  #       - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+  #       - DB_USER=${DB_USER}
+  #       - DB_PASSWORD=${DB_PASSWORD}
+  #   ports:
+  #       - "3306:3306"
   #   volumes:
   #     - mariadb:/var/lib/mysql
-  #   env_file:
-  #     - .env
+  #   # env_file:
+  #   #   - .env
   #   networks:
   #     - inception
   #   restart: always
