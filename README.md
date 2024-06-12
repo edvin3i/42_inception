@@ -63,6 +63,7 @@ $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |   sudo tee /etc/apt/s
 2. Installing Docker and Docker Compose
 ```bash
 sudo apt update && sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+newgrp docker
 sudo usermod -aG docker $USER
 ```
 3. Test
