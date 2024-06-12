@@ -5,7 +5,7 @@ ARG DB_NAME \
     DB_USER \
     DB_PASSWORD
 
-WORKDIR /app
+#WORKDIR /app
 
 COPY tools/mariadb_start.sh /mariadb_start.sh
 
