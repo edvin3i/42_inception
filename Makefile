@@ -8,8 +8,8 @@ RM				=	sudo rm -rf
 create_dirs:
 	@echo "\e[36mCreating the volumes (dirs) at $(DATA_DIR)\e[0m"
 	@mkdir -p $(DATA_DIR)/mariadb
-	@mkdir -p $(DATA_DIR)/wordpress
-	@unzip ./srcs/requirements/wordpress/tools/wordpress.zip $(DATA_DIR)/wordpress/
+#	@mkdir -p $(DATA_DIR)/wordpress
+	@unzip ./srcs/requirements/wordpress/tools/wordpress.zip -d $(DATA_DIR)/
 #	@mkdir -p $(DATA_DIR)/nginx
 
 build: create_dirs
