@@ -22,11 +22,11 @@ sed -i "s|skip-networking|skip-networking=0|g" \
     
 COPY requirements/mariadb/tools/create_db.sh /create_db.sh
 
-RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
+RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql; \
+    sh create_db.sh && rm create_db.sh
 
 EXPOSE 3306
 
 USER mysql
-
 
 CMD [ "/usr/bin/mysqld", "--skip-log-error" ]
