@@ -1,5 +1,6 @@
 #!bin/sh
-cat << EOF > /tmp/create_db.sql                               # создание базы
+
+cat << EOF > /tmp/create_db.sql
 USE mysql;
 FLUSH PRIVILEGES;
 DELETE FROM     mysql.user WHERE User='';
@@ -13,6 +14,6 @@ GRANT ALL PRIVILEGES ON wordpress.* TO '${DB_USER}'@'%';
 FLUSH PRIVILEGES;
 EOF
 
-/usr/bin/mysqld --user=mysql --bootstrap < /tmp/create_db.sql  # выполняем код 
+/usr/bin/mysqld --user=mysql --bootstrap < /tmp/create_db.sql
 
 rm -f /tmp/create_db.sql
