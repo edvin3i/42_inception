@@ -14,14 +14,7 @@ volumes:
                 driver_opts:
                         device: ${HOME}/data/mariadb
                         o: bind
-                        type: none
-        # nginx:
-        #         name: nginx
-        #         driver: local
-        #         driver_opts:
-        #                 device: ${HOME}/data/nginx
-        #                 o: bind
-        #                 type: none          
+                        type: none     
 networks:
   inception:
     name: inception
@@ -46,6 +39,15 @@ services:
     build: 
       context: .
       dockerfile: requirements/wordpress/Dockerfile
+      args:
+        - DOMAIN_NAME=${DOMAIN_NAME}
+        - DB_NAME=${DB_NAME}
+        - DB_USER=${DB_USER}
+        - DB_PASSWORD=${DB_PASSWORD}
+        - WP_TITLE=${WP_TITLE}
+        - WP_ADMIN=${WP_ADMIN}
+        - WP_ADM_PASS=${WP_ADM_PASS}
+        - WP_ADM_EMAIL=${WP_ADM_EMAIL}
     depends_on:
       - mariadb
     volumes:
