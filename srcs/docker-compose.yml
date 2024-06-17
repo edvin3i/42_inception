@@ -34,27 +34,27 @@ services:
       dockerfile: requirements/nginx/Dockerfile
     ports:
       - "443:443"
-    # depends_on:
-    #   - wordpress
+    depends_on:
+      - wordpress
     volumes:
       - wordpress:/var/www/
     networks:
       - inception
     restart: always
-  # wordpress:
-  #   container_name: wordpress
-  #   bbuild: 
-  #     context: .
-  #     dockerfile: requirements/wordpress/Dockerfile
-  #   depends_on:
-  #     - mariadb
-  #   volumes:
-  #     - wordpress:/var/www/
-  #   env_file:
-  #     - .env
-  #   networks:
-  #     - inception
-  #   restart: always
+  wordpress:
+    container_name: wordpress
+    build: 
+      context: .
+      dockerfile: requirements/wordpress/Dockerfile
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress:/var/www/
+    env_file:
+      - .env
+    networks:
+      - inception
+    restart: always
   mariadb:
     container_name: mariadb
     build: 
