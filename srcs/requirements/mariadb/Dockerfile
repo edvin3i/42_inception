@@ -17,7 +17,9 @@ echo 'skip-host-cache'; \
 echo 'skip-name-resolve'; \
 echo 'bind-address=0.0.0.0'; \
 } | tee  /etc/my.cnf.d/my.cnf; \
-sed -i "s|skip-networking|skip-networking=0|g" \
+sed -i "s|skip-networking|#skip-networking=0|g" \
+/etc/my.cnf.d/mariadb-server.cnf; \
+sed -i "s|#bind-address=0.0.0.0|bind-address=0.0.0.0|g" \
 /etc/my.cnf.d/mariadb-server.cnf
     
 COPY requirements/mariadb/tools/create_db.sh /create_db.sh

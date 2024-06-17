@@ -7,8 +7,8 @@ ARG DOMAIN_NAME \
 
 WORKDIR /var/www/
 
-RUN apk update && apk add --no-cache \
-    zsh curl tzdata libmcrypt-dev zlib-dev gmp-dev \
+RUN apk update && apk upgrade && apk add --no-cache \
+    mariadb-client curl tzdata libmcrypt-dev zlib-dev gmp-dev \
     freetype-dev libjpeg-turbo-dev libpng-dev \
     php83 php83-fpm php83-json php83-zlib php83-xml php83-xmlwriter php83-simplexml php83-pdo php83-phar php83-openssl \
     php83-pdo_mysql php83-mysqli php83-session php83-gd php83-iconv php83-gmp php83-zip php83-curl php83-opcache php83-ctype \
@@ -19,5 +19,9 @@ RUN apk update && apk add --no-cache \
 
 EXPOSE 9000
 
-COPY requirements/wordpress/tools/wp_install.sh /tmp
-RUN sh -c /tmp/wp_install.sh && rm /tmp/wp_install.sh
+COPY requirements/wordpress/tools/wp_install.sh /tmp/wp_install.sh
+RUN chmod a+x /tmp/wp_install.sh \
+    && sh /tmp/wp_install.sh \
+    && rm /tmp/wp_install.sh
+
+CMD ["/usr/sbin/php-fpm83", "-F"]
