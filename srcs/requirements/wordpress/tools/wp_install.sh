@@ -1,17 +1,52 @@
-#!bin/sh
+#!/bin/sh
 
-wp core download --path=/var/www \
-                 --locale=en_US
+# Wait for MariaDB to be ready
+echo "Waiting for MariaDB to be ready..."
+while ! mysqladmin ping -h"$DB_HOST" --silent; do
+    sleep 1
+done
 
-wp config create --dbname=${DB_NAME} \
-                 --dbhost=mariadb \
-                 --dbuser=${DB_USER} \
-                 --dbpass=${DB_PASSWORD} \
-                 --dbprefix='wp_' \
-                 --dbcharset='utf8' \
-                 --dbcollate=''
+# Check if WordPress is already installed
+if wp core is-installed --path=/var/www; then
+    echo "WordPress is already installed."
+else
+    echo "Downloading WordPress..."
+    wp core download --path=/var/www --locale=en_US
+    if [ $? -ne 0 ]; then
+        echo "Error when downloading WordPress"
+        exit 1
+    fi
 
-wp db create
+    echo "Creating WP config file..."
+    wp config create --dbname=${DB_NAME} \
+                     --dbhost=${DB_HOST} \
+                     --dbuser=${DB_USER} \
+                     --dbpass=${DB_PASSWORD} \
+                     --dbprefix='wp_' \
+                     --dbcharset='utf8' \
+                     --dbcollate=''
+    if [ $? -ne 0 ]; then
+        echo "Error when creating config file"
+        exit 1
+    fi
+
+    echo "Installing WordPress..."
+    wp core install --url=${DOMAIN_NAME} \
+                    --title=${WP_TITLE} \
+                    --admin_user=${WP_ADMIN} \
+                    --admin_password=${WP_ADM_PASS} \
+                    --admin_email=${WP_ADM_EMAIL}
+    if [ $? -ne 0 ]; then
+        echo "Error when installing WordPress"
+        exit 1
+    fi
+
+    echo "WordPress successfully installed!"
+fi
+
+# Start PHP-FPM
+exec "$@"
+
 
 # wp core install --url=${DOMAIN_NAME} \
 #                 --title=${WP_TITLE} \

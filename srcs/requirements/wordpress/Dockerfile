@@ -1,9 +1,14 @@
 FROM alpine:3.20
 
-ARG DOMAIN_NAME \
+ENV DOMAIN_NAME \
+    DB_HOST \
     DB_NAME \
     DB_USER \
-    DB_PASSWORD
+    DB_PASSWORD \
+    WP_TITLE \
+    WP_ADMIN \
+    WP_ADM_PASS \
+    WP_ADM_EMAIL
 
 WORKDIR /var/www/
 
@@ -19,9 +24,10 @@ RUN apk update && apk upgrade && apk add --no-cache \
 
 EXPOSE 9000
 
-COPY requirements/wordpress/tools/wp_install.sh /tmp/wp_install.sh
-RUN chmod a+x /tmp/wp_install.sh \
-    && sh /tmp/wp_install.sh \
-    && rm /tmp/wp_install.sh
+COPY requirements/wordpress/tools/wp_install.sh /usr/local/bin/wp_install.sh
+
+RUN chmod a+x /usr/local/bin/wp_install.sh
+
+ENTRYPOINT [ "sh", "/usr/local/bin/wp_install.sh" ]
 
 CMD ["/usr/sbin/php-fpm83", "-F"]
