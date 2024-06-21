@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.19
 
 ARG DB_NAME \
     DB_ROOT_PASSWORD \

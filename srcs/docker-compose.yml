@@ -58,7 +58,7 @@ services:
       - .env
     networks:
       - inception
-    restart: no
+    restart: always
   mariadb:
     container_name: mariadb
     build: 

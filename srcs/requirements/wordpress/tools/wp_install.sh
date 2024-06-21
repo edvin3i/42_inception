@@ -2,7 +2,7 @@
 
 # Wait for MariaDB to be ready
 echo "Waiting for MariaDB to be ready..."
-while ! mysqladmin ping -h"$DB_HOST" --silent; do
+while ! mysqladmin ping -h"$DB_HOST" -u "$DB_USER" -p"$DB_PASSWORD" --silent; do
     sleep 1
 done
 
@@ -45,7 +45,9 @@ else
 fi
 
 # Start PHP-FPM
-exec "$@"
+# exec "$@"
+echo "Startin php-fpm..."
+/usr/sbin/php-fpm83 -F
 
 
 # wp core install --url=${DOMAIN_NAME} \

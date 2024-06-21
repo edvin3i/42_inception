@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.19
 
 ENV DOMAIN_NAME \
     DB_HOST \
@@ -26,8 +26,8 @@ EXPOSE 9000
 
 COPY requirements/wordpress/tools/wp_install.sh /usr/local/bin/wp_install.sh
 
-RUN chmod a+x /usr/local/bin/wp_install.sh
+RUN chmod a+x /usr/local/bin/wp_install.sh; ln -s /usr/bin/php83 /usr/bin/php
 
 ENTRYPOINT [ "sh", "/usr/local/bin/wp_install.sh" ]
 
-CMD ["/usr/sbin/php-fpm83", "-F"]
+# CMD ["/usr/sbin/php-fpm83", "-F"]
