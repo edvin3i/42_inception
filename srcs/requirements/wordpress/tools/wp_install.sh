@@ -45,9 +45,9 @@ else
 fi
 
 # Start PHP-FPM
-# exec "$@"
-echo "Startin php-fpm..."
-/usr/sbin/php-fpm83 -F
+exec "$@"
+echo "Starting php-fpm..."
+# /usr/sbin/php-fpm83 -F
 
 
 # wp core install --url=${DOMAIN_NAME} \
