@@ -44,6 +44,8 @@ else
     echo "WordPress successfully installed!"
 fi
 
+chown -R nobody:nogroup /var/www && chmod -R 755 /var/www
+
 # Start PHP-FPM
 exec "$@"
 echo "Starting php-fpm..."

@@ -51,7 +51,7 @@ services:
         WP_ADM_PASS: ${WP_ADM_PASS}
         WP_ADM_EMAIL: ${WP_ADM_EMAIL}
     ports:
-      - "9000:9000"
+      - "9000"
     depends_on:
       - mariadb
     volumes:
