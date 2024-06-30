@@ -8,7 +8,10 @@ ENV DOMAIN_NAME \
     WP_TITLE \
     WP_ADMIN \
     WP_ADM_PASS \
-    WP_ADM_EMAIL
+    WP_ADM_EMAIL \
+    WP_USER \
+    WP_USER_PASS \
+    WP_USER_EMAIL
 
 WORKDIR /var/www/
 

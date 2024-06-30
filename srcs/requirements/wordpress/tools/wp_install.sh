@@ -42,27 +42,30 @@ else
     fi
 
     echo "WordPress successfully installed!"
+
+    wp post delete 1 --force
+
+    curl -O https://public-api.wordpress.com/rest/v1/themes/download/button-2.zip && \
+    wp theme install button-2.zip --activate
+    
+    if [ $? -ne 0 ]; then
+        echo "Error when installing Theme"
+        exit 1
+    fi
+
+    echo "Creating additional user ${WP_USER}"
+    wp user create ${WP_USER} ${WP_USER_EMAIL} --user_pass=${WP_USER_PASS}
+
+    echo "Creating my first default post."
+    wp post create \
+        --post_author=1 \
+        --post_title="My first Docker Compose expirience." \
+        --post_content="I've installed Docker Compose, and I can rule the world with only two (or three) commands!" \
+        --post_status=publish
 fi
 
 chown -R nobody:nogroup /var/www && chmod -R 755 /var/www
 
 # Start PHP-FPM
-exec "$@"
 echo "Starting php-fpm..."
-# /usr/sbin/php-fpm83 -F
-
-
-# wp core install --url=${DOMAIN_NAME} \
-#                 --title=${WP_TITLE} \
-#                 --admin_user=${WP_ADMIN} \
-#                 --admin_password=${WP_ADM_PASS} \
-#                 --admin_email=${WP_ADM_EMAIL}
-
-
-# wp config create --dbname=wordpress \
-#                  --dbhost=mariadb \
-#                  --dbuser=martien \
-#                  --dbpass=r3DplAne5t \
-#                  --dbprefix='wp_' \
-#                  --dbcharset='utf8' \
-#                  --dbcollate=''
+exec "$@"
