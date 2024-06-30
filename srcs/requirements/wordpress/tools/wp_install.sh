@@ -43,9 +43,11 @@ else
 
     echo "WordPress successfully installed!"
 
+    # Deleting default posts
     wp post delete 1 --force
     wp post delete 2 --force
 
+    # Downloading and installing theme
     curl -O https://public-api.wordpress.com/rest/v1/themes/download/button-2.zip && \
     wp theme install button-2.zip --activate
     
@@ -70,7 +72,8 @@ else
         --post_status=publish
 fi
 
-chown -R nobody:nogroup /var/www && chmod -R 755 /var/www
+chown -R nobody:nogroup /var/www && \
+chmod -R 755 /var/www
 
 # Start PHP-FPM
 echo "Starting php-fpm..."
