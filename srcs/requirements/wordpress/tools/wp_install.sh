@@ -44,6 +44,7 @@ else
     echo "WordPress successfully installed!"
 
     wp post delete 1 --force
+    wp post delete 2 --force
 
     curl -O https://public-api.wordpress.com/rest/v1/themes/download/button-2.zip && \
     wp theme install button-2.zip --activate
@@ -52,6 +53,11 @@ else
         echo "Error when installing Theme"
         exit 1
     fi
+
+    echo "Filling an information about user ${WP_ADMIN}"
+    wp user meta update ${WP_ADMIN} first_name "Ivan"
+    wp user meta update ${WP_ADMIN} last_name "Bondar"
+    wp user meta update ${WP_ADMIN} description "Je suis étudiant à l'École 42."
 
     echo "Creating additional user ${WP_USER}"
     wp user create ${WP_USER} ${WP_USER_EMAIL} --user_pass=${WP_USER_PASS}
