@@ -43,6 +43,12 @@ else
 
     echo "WordPress successfully installed!"
 
+    wp option update home "https://${DOMAIN_NAME}"
+    wp option update siteurl "https://${DOMAIN_NAME}"
+
+    echo "Install and activate Redis plugin"
+    wp plugin install wp-redis --activate
+
     # Deleting default posts
     wp post delete 1 --force
     wp post delete 2 --force
