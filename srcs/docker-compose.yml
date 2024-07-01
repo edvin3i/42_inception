@@ -50,6 +50,11 @@ services:
         WP_ADMIN: ${WP_ADMIN}
         WP_ADM_PASS: ${WP_ADM_PASS}
         WP_ADM_EMAIL: ${WP_ADM_EMAIL}
+        WP_USER: ${WP_USER}
+        WP_USER_PASS: ${WP_USER_PASS}
+        WP_USER_EMAIL: ${WP_USER_EMAIL}
+        WP_REDIS_PASSWORD: ${WP_REDIS_PASSWORD}
+        WP_CACHE_KEY_SALT: ${WP_CACHE_KEY_SALT}
         FS_USER: ${FS_USER}
     ports:
       - "9000"
@@ -93,5 +98,17 @@ services:
     volumes:
       - wordpress:/var/www
     networks: 
+      - inception
+    restart: always
+  redis:
+    container_name: redis
+    build:
+      context: .
+      dockerfile: requirements/bonus/redis/Dockerfile
+      args:
+        WP_REDIS_PASSWORD: ${WP_REDIS_PASSWORD}
+    ports:
+      - "6379"
+    networks:
       - inception
     restart: always

@@ -46,8 +46,17 @@ else
     wp option update home "https://${DOMAIN_NAME}"
     wp option update siteurl "https://${DOMAIN_NAME}"
 
+    # Set Redis params in wp-config
+    echo "Set Redis params in wp-config"
+    wp config set WP_REDIS_SCHEME "tcp"
+    wp config set WP_REDIS_HOST "redis"
+    wp config set WP_REDIS_PORT 6379
+    wp config set WP_REDIS_PASSWORD ${WP_REDIS_PASSWORD}
+
     echo "Install and activate Redis plugin"
-    wp plugin install wp-redis --activate
+    wp plugin install redis-cache --activate && \
+    # ln -s /var/www/html/wp-content/plugins/wp-redis/object-cache.php /var/www/html/wp-content/object-cache.php && \
+    wp redis enable
 
     # Deleting default posts
     wp post delete 1 --force
@@ -79,10 +88,11 @@ else
 fi
 
 chown -R nobody:nogroup /var/www/html && \
-find /var/www -type d -exec chmod 775 {} \;
-find /var/www -type f -exec chmod 664 {} \;
-find /var/www -type d -exec chmod g+s {} \;
-addgroup ${FS_USER} nogroup
+chmod -R 777 /var/www/;
+# find /var/www -type d -exec chmod 775 {} \;
+# find /var/www -type f -exec chmod 664 {} \;
+# find /var/www -type d -exec chmod g+s {} \;
+# addgroup ${FS_USER} nogroup
 
 # Start PHP-FPM
 echo "Starting php-fpm..."
