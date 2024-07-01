@@ -11,9 +11,10 @@ ENV DOMAIN_NAME \
     WP_ADM_EMAIL \
     WP_USER \
     WP_USER_PASS \
-    WP_USER_EMAIL
+    WP_USER_EMAIL \
+    FS_USER
 
-WORKDIR /var/www/
+WORKDIR /var/www/html
 
 RUN apk update && apk upgrade && apk add --no-cache \
     mariadb-client curl tzdata libmcrypt-dev zlib-dev gmp-dev iproute2 mc vim\

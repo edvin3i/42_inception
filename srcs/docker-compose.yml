@@ -50,6 +50,7 @@ services:
         WP_ADMIN: ${WP_ADMIN}
         WP_ADM_PASS: ${WP_ADM_PASS}
         WP_ADM_EMAIL: ${WP_ADM_EMAIL}
+        FS_USER: ${FS_USER}
     ports:
       - "9000"
     depends_on:
@@ -77,5 +78,20 @@ services:
     env_file:
       - .env
     networks:
+      - inception
+    restart: always
+  vsftpd:
+    container_name: vsftpd
+    build:
+      context: .
+      dockerfile: requirements/bonus/vsftpd/Dockerfile
+      args:
+        - FS_USER=${FS_USER}
+        - FS_USER_PASS=${FS_USER_PASS}
+    ports:
+      - "21:21"
+    volumes:
+      - wordpress:/var/www
+    networks: 
       - inception
     restart: always

@@ -7,11 +7,11 @@ while ! mysqladmin ping -h"$DB_HOST" -u "$DB_USER" -p"$DB_PASSWORD" --silent; do
 done
 
 # Check if WordPress is already installed
-if wp core is-installed --path=/var/www; then
+if wp core is-installed --path=/var/www/html; then
     echo "WordPress is already installed."
 else
     echo "Downloading WordPress..."
-    wp core download --path=/var/www --locale=en_US
+    wp core download --path=/var/www/html --locale=en_US
     if [ $? -ne 0 ]; then
         echo "Error when downloading WordPress"
         exit 1
@@ -78,8 +78,11 @@ else
         --post_status=publish
 fi
 
-chown -R nobody:nogroup /var/www && \
-chmod -R 755 /var/www
+chown -R nobody:nogroup /var/www/html && \
+find /var/www -type d -exec chmod 775 {} \;
+find /var/www -type f -exec chmod 664 {} \;
+find /var/www -type d -exec chmod g+s {} \;
+addgroup ${FS_USER} nogroup
 
 # Start PHP-FPM
 echo "Starting php-fpm..."
