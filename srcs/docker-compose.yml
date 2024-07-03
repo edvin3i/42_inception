@@ -129,6 +129,8 @@ services:
     build:
       context: .
       dockerfile: requirements/bonus/chatai/Dockerfile
+    environment:
+      - HF_TOKEN=${HF_TOKEN}
     ports:
       - "8888:8888"
     networks:
