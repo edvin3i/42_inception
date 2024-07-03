@@ -124,3 +124,13 @@ services:
     networks:
       - inception
     restart: always
+  chatai:
+    container_name: chatai
+    build:
+      context: .
+      dockerfile: requirements/bonus/chatai/Dockerfile
+    ports:
+      - "8888:8888"
+    networks:
+      - inception
+    restart: always
