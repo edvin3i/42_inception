@@ -20,6 +20,9 @@ def generate_response(prompt):
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return response.strip()
 
+st.set_page_config(
+        page_title="Stupid Chatbot",
+)
 st.title("Stupid Chatbot")
 st.write("This is a simple GPT-2 powered chatbot. Ask anything!")
 

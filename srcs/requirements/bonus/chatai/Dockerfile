@@ -32,4 +32,4 @@ RUN . /app/venv/bin/activate && \
 
 EXPOSE 8888
 
-CMD ["streamlit", "run", "app.py", "--server.port=8888", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "app.py", "page_title='Stupid Chatbot'", "--server.port=8888", "--server.address=0.0.0.0"]
