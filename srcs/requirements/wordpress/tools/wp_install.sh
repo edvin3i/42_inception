@@ -55,7 +55,6 @@ else
 
     echo "Install and activate Redis plugin"
     wp plugin install redis-cache --activate && \
-    # ln -s /var/www/html/wp-content/plugins/wp-redis/object-cache.php /var/www/html/wp-content/object-cache.php && \
     wp redis enable
 
     # Deleting default posts

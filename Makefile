@@ -1,7 +1,6 @@
 DOCKER_COMPOSE	=	docker compose
 DCOMPOSE_CONFG	=	srcs/docker-compose.yml
 DATA_DIR		=	$(HOME)/data
-# DATA_DIR		=	/home/$(USER)/data
 RM				=	sudo rm -rf
 
 
@@ -9,7 +8,6 @@ create_dirs:
 	@echo "\e[36mCreating the volumes (dirs) at $(DATA_DIR)\e[0m"
 	@mkdir -p $(DATA_DIR)/mariadb
 	@mkdir -p $(DATA_DIR)/wordpress
-#	@unzip ./srcs/requirements/wordpress/tools/wordpress.zip -d $(DATA_DIR)/
 
 build: create_dirs
 	$(DOCKER_COMPOSE) -f $(DCOMPOSE_CONFG) build
@@ -40,3 +38,8 @@ fclean:
 		$(RM) $(DATA_DIR)
 
 .PHONY: create_dirs build up down start stop list clean fclean
+
+# sudo echo "127.0.0.1        gbreana.42.fr" >> /etc/hosts
+# sudo echo "127.0.0.1        db.gbreana.42.fr" >> /etc/hosts
+# sudo echo "127.0.0.1        baikal.gbreana.42.fr" >> /etc/hosts
+# sudo echo "127.0.0.1        chat.gbreana.42.fr" >> /etc/hosts
