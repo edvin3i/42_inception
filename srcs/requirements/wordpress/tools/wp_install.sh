@@ -82,16 +82,12 @@ else
     wp post create \
         --post_author=1 \
         --post_title="My first Docker Compose expirience." \
-        --post_content="I've installed Docker Compose, and I can rule the world with only two (or three) commands!" \
+        --post_content="I’ve installed Docker Compose, and now I can rule the world with just two (or three) commands!" \
         --post_status=publish
 fi
 
 chown -R nobody:nogroup /var/www/html && \
 chmod -R 777 /var/www/;
-# find /var/www -type d -exec chmod 775 {} \;
-# find /var/www -type f -exec chmod 664 {} \;
-# find /var/www -type d -exec chmod g+s {} \;
-# addgroup ${FS_USER} nogroup
 
 # Start PHP-FPM
 echo "Starting php-fpm..."
